@@ -36,5 +36,5 @@ overrides:
         flow_cap_min: 12.638 # (1,000 MW)
         flow_cap_max: 12.638 # (1,000 MW)
 
-  use_gurobi:
-    config.build.backend: gurobi
+  use_cbc:
+    config.build.backend: cbc

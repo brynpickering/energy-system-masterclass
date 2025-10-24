@@ -73,6 +73,10 @@ pixi run grbgetkey ae36ac20-16e6-acd2-f242-4da6e765fa0a
 
 The license key can be found on the Gurobi portal, under the `Licenses` tab and then the `show installation instructions` button.
 
+> [!NOTE]
+> If this just isn't working, you can use the fall-back solver `cbc`.
+> Just use `--scenario=use_cbc` in the `calliope` commands below (or `--scenario=add_nuclear,use_cbc` when adding multiple scenarios).
+
 ## Run
 
 We recommend you run the models from the terminal.
