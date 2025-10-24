@@ -1,31 +1,23 @@
+# SPDX-FileCopyrightText: euro-calliope developers
+# SPDX-FileCopyrightText: 2024-2025 Bryn Pickering <bp325@cam.ac.uk>
+#
+# SPDX-License-Identifier: CC-BY-4.0
+
 import: [scenarios.yaml]
 
 config:
   init:
     name: "Example model"
     calliope_version: "0.7"
-    time_subset: ["2015", "2015"]
-    time_resample: "4h"
+    subset:
+      timesteps: ['2015', '2015']
+    resample:
+      timesteps: "4h"
+    mode: base
   build:
-    mode: plan
-  solve:
-    solver: cbc
+    backend: gurobi
 
-templates:
-  ac_transmission:
-    name: "High voltage AC transmission line"
-    color: "#9E9E9E"
-    base_tech: transmission
-    carrier_in: electricity
-    carrier_out: electricity
-    flow_out_eff: 0.99995 # (1/km)
-    lifetime: 60
-    cost_flow_cap:
-      data: 0.94 # (1e+06 EUR2013/MW/km)
-      index: monetary
-      dims: costs
-
-parameters:
+data_definitions:
   cost_interest_rate:
     data: 0.073 # average onshore wind WACC OECD from [@Steffen:2019]
     index: monetary
@@ -261,10 +253,20 @@ techs:
     carrier_in: heat
 
   link_IRL_GBR:
-    template: ac_transmission
-    from: IRL
-    to: GBR
-    flow_cap_min: 1.75 # (1,000 MW)
+    link_from: IRL
+    link_to: GBR
+    name: "High voltage AC transmission line"
+    color: "#9E9E9E"
+    base_tech: transmission
+    carrier_in: electricity
+    carrier_out: electricity
+    flow_out_eff: 0.99995 # (1/km)
+    flow_cap_min: 1.75  # (1,000 MW)
+    lifetime: 60
+    cost_flow_cap:
+      data: 0.94 # (1e+06 EUR2013/MW/km)
+      index: monetary
+      dims: costs
 
 nodes:
   IRL: # Ireland

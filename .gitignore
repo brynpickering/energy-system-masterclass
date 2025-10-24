@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2024-2025 Bryn Pickering <bp325@cam.ac.uk>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -164,6 +169,10 @@ cython_debug/
 # Project-specific
 
 gurobi.log
-.vscode
 .DS_Store
+!.vscode
+*.nc# pixi environments
+.pixi/*
+!.pixi/config.toml
 *.nc
+/*output*/

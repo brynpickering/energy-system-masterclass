@@ -1,3 +1,10 @@
+<!--
+SPDX-FileCopyrightText: euro-calliope developers
+SPDX-FileCopyrightText: 2024-2025 Bryn Pickering <bp325@cam.ac.uk>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # References
 
 When we use parameters and assumptions from the literature, we indicate the source using a key in the form of `[@first-author:year]`. Here's a list of all sources we use:

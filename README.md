@@ -1,4 +1,10 @@
-# ET-Masterclass-2024
+<!--
+SPDX-FileCopyrightText: 2024-2025 Bryn Pickering <bp325@cam.ac.uk>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
+# energy-system-masterclass
 
 Energy Technologies MPhil ETA1 masterclass in Energy Systems Modelling.
 
@@ -26,15 +32,11 @@ First, you will need to install software on your device:
 1. [VSCode](https://code.visualstudio.com/download).
 This gives you access to an Interactive Development Environment (IDE) in which to edit code and to interact with your device's terminal.
 On Windows, I recommend you follow the _command prompt_ instructions.
-2. [Miniforge](https://github.com/conda-forge/miniforge?tab=readme-ov-file#download).
-This gives you access to `conda` in your device's terminal, with which you can create isolated Python environments to work in.
-There are other variants of access to `conda` (Anaconda, Miniconda, Mambaforge, etc.).
-I recommend `Miniforge` as it defaults to the open-source `conda-forge` [channel](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-channels.html), instead of the commercial `defaults` channel.
-> [!NOTE]
-> On Windows, you should download `Miniforge3-Windows-x86_64` from the releases.
-> You may find that on Chrome it says the download is "dangerous" - you can safely bypass this and force the download.
+2. [pixi](https://pixi.sh/latest/).
+This gives you access to `pixi` in your device's terminal, with which you can create isolated Python environments to work in.
 3. [The Gurobi solver license](https://www.gurobi.com/features/academic-named-user-license/).
 This gives you access to a high-performance optimisation solver.
+
 > [!TIP]
 > You can ignore steps 2 and 3 of the instructions (downloading the installer) and go straight to requesting a "named user" license after registering.
 > See our [Gurobi license section](#set-the-gurobi-license) for details on installing the license.
@@ -44,60 +46,41 @@ This gives you access to a high-performance optimisation solver.
 
 ### Set up VSCode
 
-With this software installed, you can then set up VSCode to allow access to `conda` and `git` from the "terminal":
+With this software installed, you can then set up your project:
 
-1. **Set the correct terminal**
-    1. Open VSCode.
-    1. Open the `command palette` (Control-Shift-P, shows a bar at the top of the screen).
-    1. Search for `Terminal: Select Default Profile`.
-    1. Select `Command Prompt`.
-1. **Install the Python Extension**.
-Click on the "Extensions" tab on the left-hand side of VSCode (four squares) and search for the official Microsoft Python extension.
-1. **Set your Python environment**
-    1. Open the `command palette` (Control-Shift-P, shows a bar at the top of the screen).
-    1. Search for `Python: Select Interpreter`
-    1. Select `base` (it should have `miniforge3` in the file path)
+1. Open VSCode.
 1. Open a new terminal window (`Terminal` top-bar tab -> `New Terminal`, it will open at the bottom of the screen).
-1. Run `conda install git` in the terminal.
+
+> [!NOTE]
+> You will be using `pixi run` before every command you make in the terminal.
+> This ensures you run your command in an isolated environment, giving you access to commands like `git`, `calliope` and `calligraph`.
 
 ### Clone the GitHub repository
 
 With VSCode set up, you can "clone" (i.e. copy) this repository to your device:
 
-1. In the VSCode terminal, call `git clone https://github.com/brynpickering/ET-masterclass-2024.git <output-directory>\ET-masterclass-2024`.
+1. In the VSCode terminal, call `pixi run git clone https://github.com/brynpickering/energy-system-masterclass.git <output-directory>/energy-system-masterclass`.
 `<output-directory>` should be a directory on your device where you want to store cloned GitHub repositories (often something like `%USERPROFILE%\Repositories` on Windows or `~/Repositories` on Linux/MacOS).
-1. Then you can open that cloned repository (i.e. downloaded folder) in VSCode (`File` top-bar tab -> `Open Folder` -> navigate to `<output-directory>\ET-masterclass-2024`).
-
-### Create the masterclass conda environment
-
-Finally, you can create the isolated Python working environment for this masterclass:
-
-1. In your `<output-directory>\ET-masterclass-2024` VSCode session, open a new terminal.
-1. Run the following two commands to create your working environment and then to _activate_ it:
-
-    ```bash
-    conda env create -f environment.yaml
-    conda activate et-masterclass
-    ```
+1. Then you can open that cloned repository (i.e. downloaded folder) in VSCode (`File` top-bar tab -> `Open Folder` -> navigate to `<output-directory>/energy-system-masterclass`).
 
 ### Set the Gurobi license
 
-With the `et-masterclass` conda environment activated, you can then call the `grbgetkey` command in the terminal to install the Gurobi license that you have requested, e.g.:
+You can then call the `grbgetkey` command in the terminal to install the Gurobi license that you have requested, e.g.:
 
 ```bash
-grbgetkey ae36ac20-16e6-acd2-f242-4da6e765fa0a
+pixi run grbgetkey ae36ac20-16e6-acd2-f242-4da6e765fa0a
 ```
 
-The license key can be found on the Gurobi portal, under the "Licenses" tab and then the "show installation instructions" button.
+The license key can be found on the Gurobi portal, under the `Licenses` tab and then the `show installation instructions` button.
 
 ## Run
 
 We recommend you run the models from the terminal.
-They will be available on your device after following the [preparation steps](#prepare), and visible in the VSCode `Explorer` when you have the `<output-directory>\ET-masterclass-2024` folder open in VSCode.
-To run a model and save the outputs in the NetCDF format (a storage convention for multi-dimensional data):
+They will be available on your device after following the [preparation steps](#prepare), and visible in the VSCode `Explorer` when you have the `<output-directory>/energy-system-masterclass` folder open in VSCode.
+To run a model and save the outputs in the NetCDF format (a storage convention for multi-dimensional data) _and_ as a set of CSVs:
 
 ```sh
-calliope run "model-gbr-irl/model.yaml" --save_netcdf "model-gbr-irl.nc"
+pixi run calliope run "model-gbr-irl/model.yaml" --save_netcdf "model-gbr-irl.nc" --save_csv "model-gbr-irl-outputs"
 ```
 
 ### Run a scenario
@@ -106,7 +89,7 @@ There is one pre-defined "scenario" in the GBR+IRL model, to add in nuclear as a
 To introduce this, you can add it to your command line arguments
 
 ```sh
-calliope run "model-gbr-irl/model.yaml" --save_netcdf "model-gbr-irl-with-nuclear.nc" --scenario add_nuclear
+pixi run calliope run "model-gbr-irl/model.yaml" --save_netcdf "model-gbr-irl-with-nuclear.nc" --save_csv "model-gbr-irl-nuclear-outputs" --scenario add_nuclear
 ```
 
 ## Visualise
@@ -115,7 +98,7 @@ Once you have results, you can use [calligraph](https://github.com/calliope-proj
 Once you have run a model, you can call calligraph with the name of the NetCDF file:
 
 ```sh
-calligraph "model-gbr-irl.nc"
+pixi run calligraph "model-gbr-irl.nc"
 ```
 
 This will open a tab in your browser with a data dashboard.

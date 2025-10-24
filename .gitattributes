@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2024-2025 Bryn Pickering <bp325@cam.ac.uk>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# SCM syntax highlighting & preventing 3-way merges
+pixi.lock merge=binary linguist-language=YAML linguist-generated=true

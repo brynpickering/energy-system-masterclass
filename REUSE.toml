@@ -1,0 +1,20 @@
+version = 2025
+SPDX-PackageName = "energy-system-masterclass"
+SPDX-PackageSupplier = "Bryn Pickering <bp325@cam.ac.uk>"
+SPDX-PackageDownloadLocation = "https://github.com/brynpickering/energy-system-masterclass"
+
+[[annotations]]
+path = [
+    "model-gbr-irl/timeseries/**/*.csv",
+    "schema/*schema.yaml"
+]
+SPDX-FileCopyrightText = "euro-calliope developers"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = [
+    "pixi.lock",
+    ".vscode/settings.json"
+]
+SPDX-FileCopyrightText = "2024-2025 Bryn Pickering <bp325@cam.ac.uk>"
+SPDX-License-Identifier = "CC0-1.0"
