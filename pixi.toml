@@ -5,9 +5,9 @@
 [workspace]
 authors = ["Bryn Pickering <17178478+brynpickering@users.noreply.github.com>"]
 channels = ["conda-forge/label/calliope_dev", "conda-forge", "gurobi"]
-name = "et-masterclass"
+name = "energy-system-masterclass"
 platforms = ["win-64", "linux-64", "osx-64", "osx-arm64", "linux-aarch64"]
-version = "0.1.0"
+version = "2025-11-28"
 
 [tasks]
 
@@ -15,8 +15,8 @@ version = "0.1.0"
 python = "3.12.*"
 matplotlib = "3.9.2.*"
 jupyterlab = "*"
-gurobi = "11.0.*"
-calliope = "0.7.0dev7.*"
+gurobi = { version = "13.*", channel = "gurobi" }
+calliope = { version = "0.7.0dev7.*", channel = "conda-forge/label/calliope_dev" }
 click = ">=8.1"
 pyproj = ">=3.6.1"
 panel = ">=1.5.2,<1.6"
